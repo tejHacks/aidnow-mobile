@@ -1,56 +1,36 @@
-# Welcome to your Expo app 👋
+# AidNow
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+> Know what to do in an emergency, wherever you are.
 
-## Get started
+## What's built
 
-1. Install dependencies
+- Country-aware **emergency call button** (112 / 911 / 999 … from the device region; Nigeria → 112, Lagos 767 noted)
+- **17 offline first-aid guides**: CPR, seizures/epilepsy, fainting, choking (adult & baby), severe bleeding, burns, anaphylaxis, asthma, stroke (FAST), heart attack, heat stroke, low blood sugar, recovery position, nosebleed, fractures, poisoning — with steps, don'ts, and "call emergency if"
+- **Seizure timer** that alerts at 5 minutes and keeps a log to share with a doctor
+- **CPR coach**: 110 bpm metronome with haptics, hands-only or 30:2 mode
+- **Medical ID** (allergies, conditions, medications, emergency contact) with one-tap call
 
-   ```bash
-   npm install
-   ```
+## Before release
 
-2. Start the app
+- Have **all guide content reviewed by a qualified clinician** and localised (Yoruba, Hausa, Igbo, Pidgin…).
+- Verify emergency numbers for every launch market (`src/data/emergency-numbers.ts`).
+- Ideas: share live location by SMS, lock-screen Medical ID, illustrated steps, voice guidance.
 
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Run it
 
 ```bash
-npm run reset-project
+npm install          # already done once after scaffolding
+npx expo start       # then press i (iOS), a (Android) or w (web)
+npm run typecheck
+npx expo lint
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+Built on **Expo SDK 58** (React Native 0.88, React 19.3), Expo Router, TypeScript.
+Everything is stored on-device with AsyncStorage (`src/lib/storage.ts`); there is no backend yet.
 
-### Other setup steps
+## Structure
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- `src/app/` — screens (Expo Router; every file is a route)
+- `src/brand.ts` — app name, brand colours, screen titles
+- `src/theme.ts` — light/dark design tokens
+- `src/components/ui.tsx` — shared UI primitives

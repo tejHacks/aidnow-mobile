@@ -1,98 +1,103 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { router } from 'expo-router';
+import { useMemo, useState } from 'react';
+import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+import { CallButton } from '@/components/call-button';
+import { Body, Card, Label, Row, Screen } from '@/components/ui';
+import { guides, type Severity } from '@/data/guides';
+import { callNumber, useMedicalId } from '@/lib/emergency';
+import { usePalette } from '@/theme';
 
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
+const severityLabel: Record<Severity, string> = {
+  critical: 'Life-threatening',
+  urgent: 'Urgent',
+  care: 'First aid',
+};
+
+export default function Home() {
+  const c = usePalette();
+  const [q, setQ] = useState('');
+  const [medical] = useMedicalId();
+
+  const list = useMemo(() => {
+    const term = q.trim().toLowerCase();
+    if (!term) return guides;
+    return guides.filter((g) => `${g.title} ${g.summary} ${g.keywords}`.toLowerCase().includes(term));
+  }, [q]);
+
+  const sevColor = (s: Severity) => (s === 'critical' ? c.danger : s === 'urgent' ? '#D97706' : c.success);
+
   return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
-  );
-}
+    <Screen>
+      <CallButton />
 
-export default function HomeScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
+      <Row style={{ gap: 10 }}>
+        {[
+          { label: 'CPR coach', emoji: '❤️', href: '/cpr' as const },
+          { label: 'Seizure timer', emoji: '⏱️', href: '/seizure-timer' as const },
+          { label: 'Medical ID', emoji: '🪪', href: '/medical-id' as const },
+        ].map((t) => (
+          <Card key={t.label} style={styles.tool} onPress={() => router.push(t.href)}>
+            <Text style={{ fontSize: 26 }}>{t.emoji}</Text>
+            <Text style={[styles.toolText, { color: c.text }]}>{t.label}</Text>
+          </Card>
+        ))}
+      </Row>
 
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
+      {medical.contactPhone ? (
+        <Card onPress={() => callNumber(medical.contactPhone)}>
+          <Label>Emergency contact</Label>
+          <Body>
+            Call {medical.contactName || 'contact'} · {medical.contactPhone}
+          </Body>
+        </Card>
+      ) : null}
 
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
+      <TextInput
+        value={q}
+        onChangeText={setQ}
+        placeholder="What's happening? e.g. seizure, choking, burn"
+        placeholderTextColor={c.subtle}
+        accessibilityLabel="Search first-aid guides"
+        style={[styles.search, { backgroundColor: c.card, borderColor: c.border, color: c.text }]}
+      />
 
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
+      <View style={{ gap: 10 }}>
+        {list.map((g) => (
+          <Pressable
+            key={g.id}
+            accessibilityRole="button"
+            onPress={() => router.push({ pathname: '/guide/[id]', params: { id: g.id } })}
+            style={({ pressed }) => [styles.row, { backgroundColor: c.card, borderColor: c.border, opacity: pressed ? 0.85 : 1 }]}>
+            <Text style={styles.emoji}>{g.emoji}</Text>
+            <View style={{ flex: 1, gap: 2 }}>
+              <Text style={[styles.rowTitle, { color: c.text }]}>{g.title}</Text>
+              <Text style={{ color: c.muted, fontSize: 14 }} numberOfLines={2}>
+                {g.summary}
+              </Text>
+            </View>
+            <View style={[styles.badge, { borderColor: sevColor(g.severity) }]}>
+              <Text style={{ color: sevColor(g.severity), fontSize: 10, fontWeight: '800' }}>{severityLabel[g.severity].toUpperCase()}</Text>
+            </View>
+          </Pressable>
+        ))}
+        {list.length === 0 ? <Body muted>No guide matches “{q}”. If in doubt, call emergency.</Body> : null}
+      </View>
+
+      <Body muted style={{ fontSize: 13, lineHeight: 19 }}>
+        AidNow gives general first-aid guidance and is not a substitute for professional medical help or a first-aid course. In an emergency,
+        always call your local emergency number first.
+      </Body>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
-  },
-  heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
-  },
-  title: {
-    textAlign: 'center',
-  },
-  code: {
-    textTransform: 'uppercase',
-  },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
-  },
+  tool: { flex: 1, alignItems: 'center', paddingVertical: 14 },
+  toolText: { fontSize: 13, fontWeight: '700', textAlign: 'center' },
+  search: { borderWidth: 1, borderRadius: 16, paddingHorizontal: 16, paddingVertical: 14, fontSize: 16 },
+  row: { flexDirection: 'row', alignItems: 'center', gap: 12, padding: 14, borderRadius: 18, borderWidth: 1 },
+  emoji: { fontSize: 28, width: 36, textAlign: 'center' },
+  rowTitle: { fontSize: 17, fontWeight: '700' },
+  badge: { borderWidth: 1, borderRadius: 999, paddingHorizontal: 8, paddingVertical: 3 },
 });
