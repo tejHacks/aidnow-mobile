@@ -1,4 +1,7 @@
+import { Image } from 'expo-image';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+
+import { art } from '@/data/art';
 
 import { callNumber, useEmergencyNumber } from '@/lib/emergency';
 import { usePalette } from '@/theme';
@@ -18,7 +21,9 @@ export function CallButton({ compact }: { compact?: boolean }) {
         <Text style={[styles.title, compact && { fontSize: 20 }]}>Call {ambulance}</Text>
         {note && !compact ? <Text style={styles.note}>{note}</Text> : null}
       </View>
-      <Text style={styles.icon}>📞</Text>
+      <View style={[styles.iconWrap, compact && { width: 40, height: 40 }]}>
+        <Image source={art.phone} style={{ width: compact ? 22 : 30, height: compact ? 22 : 30 }} accessibilityIgnoresInvertColors />
+      </View>
     </Pressable>
   );
 }
@@ -29,5 +34,5 @@ const styles = StyleSheet.create({
   kicker: { color: '#FFE4E6', fontSize: 12, fontWeight: '700', letterSpacing: 1.2, textTransform: 'uppercase' },
   title: { color: '#fff', fontSize: 30, fontWeight: '800', letterSpacing: -0.5 },
   note: { color: '#FFE4E6', fontSize: 13, marginTop: 2 },
-  icon: { fontSize: 34 },
+  iconWrap: { width: 56, height: 56, borderRadius: 28, backgroundColor: 'rgba(255,255,255,0.18)', alignItems: 'center', justifyContent: 'center' },
 });

@@ -55,6 +55,10 @@ icons = {
     "tool-cpr": svg(f'<path d="{HEART}" fill="{RED}"/><g fill="{SKIN}" stroke="{DEEP}" stroke-opacity=".25" stroke-width="2"><rect x="30" y="34" width="36" height="16" rx="8"/><rect x="34" y="46" width="28" height="16" rx="8"/></g><path d="M48 6 V 18 M36 10 L 40 18 M60 10 L 56 18" stroke="{AMBER}" stroke-width="4" stroke-linecap="round"/>'),
     "tool-timer": svg(f'<rect x="40" y="6" width="16" height="10" rx="3" fill="{SLATE}"/><path d="M70 22 L 78 14" stroke="{SLATE}" stroke-width="6" stroke-linecap="round"/><circle cx="48" cy="54" r="34" fill="{WHITE}" stroke="{VIOLET}" stroke-width="7"/><path d="M48 54 L 48 32" stroke="{SLATE}" stroke-width="5" stroke-linecap="round"/><path d="M48 54 L 64 62" stroke="{RED}" stroke-width="5" stroke-linecap="round"/><circle cx="48" cy="54" r="4" fill="{SLATE}"/>'),
     "tool-medical-id": svg(f'<rect x="8" y="20" width="80" height="56" rx="10" fill="{WHITE}" stroke="{SKY}" stroke-width="5"/><rect x="8" y="20" width="80" height="14" rx="7" fill="{SKY}"/><circle cx="30" cy="54" r="10" fill="{SKIN}"/><path d="M18 72 C 20 64, 40 64, 42 72" fill="{SKY}"/><path d="M50 50 H 76 M50 60 H 70" stroke="{SLATE}" stroke-opacity=".35" stroke-width="4" stroke-linecap="round"/><circle cx="76" cy="27" r="0" fill="none"/><path d="M68 27 H 80 M74 21 V 33" stroke="{WHITE}" stroke-width="4" stroke-linecap="round"/>'),
+
+    # UI glyphs
+    "phone": svg(f'<path d="M30 14 C 34 12, 38 14, 40 18 L 46 32 C 48 36, 46 40, 42 42 L 36 46 C 40 58, 48 66, 60 72 L 64 66 C 66 62, 70 60, 74 62 L 86 68 C 90 70, 92 74, 90 78 L 86 86 C 84 90, 78 92, 72 90 C 42 82, 18 58, 10 28 C 8 22, 10 18, 14 16 Z" fill="{WHITE}"/>'),
+    "dont": svg(f'<circle cx="48" cy="48" r="40" fill="{RED}"/><path d="M34 34 L62 62 M62 34 L34 62" stroke="{WHITE}" stroke-width="10" stroke-linecap="round"/>'),
 }
 
 # Onboarding illustrations (wider canvas)

@@ -4,6 +4,9 @@ import { StyleSheet, Text, View } from 'react-native';
 import { ArtTile } from '@/components/art-tile';
 import { CallButton } from '@/components/call-button';
 import { Body, Button, Card, H1, Label, Screen } from '@/components/ui';
+import { Image } from 'expo-image';
+
+import { art } from '@/data/art';
 import { getGuide, guideArt } from '@/data/guides';
 import { usePalette } from '@/theme';
 
@@ -59,7 +62,10 @@ export default function GuideScreen() {
         <Card style={{ borderColor: c.danger }}>
           <Label style={{ color: c.danger }}>Don&apos;t</Label>
           {guide.dont.map((d) => (
-            <Body key={d}>✕ {d}</Body>
+            <View key={d} style={styles.dont}>
+              <Image source={art.dont} style={{ width: 20, height: 20, marginTop: 2 }} accessibilityIgnoresInvertColors />
+              <Body style={{ flex: 1 }}>{d}</Body>
+            </View>
           ))}
         </Card>
       ) : null}
@@ -81,4 +87,5 @@ const styles = StyleSheet.create({
   num: { width: 30, height: 30, borderRadius: 15, alignItems: 'center', justifyContent: 'center' },
   numText: { color: '#fff', fontWeight: '800' },
   stepText: { flex: 1, fontSize: 18, lineHeight: 26 },
+  dont: { flexDirection: 'row', gap: 10, alignItems: 'flex-start' },
 });
