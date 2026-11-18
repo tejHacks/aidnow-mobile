@@ -1,9 +1,10 @@
 import { router, Stack, useLocalSearchParams } from 'expo-router';
 import { StyleSheet, Text, View } from 'react-native';
 
+import { ArtTile } from '@/components/art-tile';
 import { CallButton } from '@/components/call-button';
 import { Body, Button, Card, H1, Label, Screen } from '@/components/ui';
-import { getGuide } from '@/data/guides';
+import { getGuide, guideArt } from '@/data/guides';
 import { usePalette } from '@/theme';
 
 export default function GuideScreen() {
@@ -23,7 +24,7 @@ export default function GuideScreen() {
     <Screen>
       <Stack.Screen options={{ title: guide.title }} />
       <View style={{ gap: 6 }}>
-        <Text style={{ fontSize: 44 }}>{guide.emoji}</Text>
+        <ArtTile source={guideArt(guide.id)} kind={guide.severity} size={84} />
         <H1>{guide.title}</H1>
         <Body muted>{guide.summary}</Body>
       </View>

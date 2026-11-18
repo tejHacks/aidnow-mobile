@@ -1,0 +1,28 @@
+/** Illustrations rendered from tool/art (see tool/make-art.py). */
+export const art = {
+  'allergy': require('@/assets/aid/allergy.png'),
+  'asthma': require('@/assets/aid/asthma.png'),
+  'bleeding': require('@/assets/aid/bleeding.png'),
+  'burns': require('@/assets/aid/burns.png'),
+  'choking': require('@/assets/aid/choking.png'),
+  'choking-baby': require('@/assets/aid/choking-baby.png'),
+  'cpr': require('@/assets/aid/cpr.png'),
+  'fainting': require('@/assets/aid/fainting.png'),
+  'fracture': require('@/assets/aid/fracture.png'),
+  'heart-attack': require('@/assets/aid/heart-attack.png'),
+  'heat-stroke': require('@/assets/aid/heat-stroke.png'),
+  'low-sugar': require('@/assets/aid/low-sugar.png'),
+  'nosebleed': require('@/assets/aid/nosebleed.png'),
+  'onboard-call': require('@/assets/aid/onboard-call.png'),
+  'onboard-calm': require('@/assets/aid/onboard-calm.png'),
+  'onboard-offline': require('@/assets/aid/onboard-offline.png'),
+  'poisoning': require('@/assets/aid/poisoning.png'),
+  'recovery': require('@/assets/aid/recovery.png'),
+  'seizure': require('@/assets/aid/seizure.png'),
+  'stroke': require('@/assets/aid/stroke.png'),
+  'tool-cpr': require('@/assets/aid/tool-cpr.png'),
+  'tool-medical-id': require('@/assets/aid/tool-medical-id.png'),
+  'tool-timer': require('@/assets/aid/tool-timer.png'),
+} as const;
+
+export type ArtKey = keyof typeof art;

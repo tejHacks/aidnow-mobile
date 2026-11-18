@@ -1,3 +1,5 @@
+import { art, type ArtKey } from './art';
+
 /**
  * First-aid guides. Content follows widely published lay-rescuer guidance
  * (Red Cross / St John Ambulance / AHA style). It must be reviewed by a
@@ -8,7 +10,6 @@ export type Severity = 'critical' | 'urgent' | 'care';
 export interface Guide {
   id: string;
   title: string;
-  emoji: string;
   severity: Severity;
   summary: string;
   signs?: string[];
@@ -23,7 +24,6 @@ export const guides: Guide[] = [
   {
     id: 'cpr',
     title: 'Not breathing — CPR',
-    emoji: '❤️',
     severity: 'critical',
     summary: 'Someone is unresponsive and not breathing normally.',
     steps: [
@@ -43,7 +43,6 @@ export const guides: Guide[] = [
   {
     id: 'seizure',
     title: 'Seizure / epilepsy',
-    emoji: '⚡',
     severity: 'urgent',
     summary: 'Jerking movements, stiffening, or loss of awareness.',
     steps: [
@@ -71,7 +70,6 @@ export const guides: Guide[] = [
   {
     id: 'fainting',
     title: 'Fainting',
-    emoji: '😵',
     severity: 'care',
     summary: 'Brief loss of consciousness, often after dizziness or feeling hot.',
     signs: ['Dizziness or light-headedness', 'Pale, sweaty skin', 'Blurred vision or ringing ears'],
@@ -94,7 +92,6 @@ export const guides: Guide[] = [
   {
     id: 'choking',
     title: 'Choking (adult or child)',
-    emoji: '🫁',
     severity: 'critical',
     summary: "Can't breathe, cough or speak — often clutching the throat.",
     steps: [
@@ -113,10 +110,10 @@ export const guides: Guide[] = [
   {
     id: 'choking-baby',
     title: 'Choking (baby under 1)',
-    emoji: '👶',
     severity: 'critical',
     summary: 'A baby is unable to cry, cough or breathe.',
     steps: [
+      'Shout for help — ask someone to call emergency services while you start.',
       'Lay the baby face down along your forearm, head lower than their bottom, supporting the jaw.',
       'Give up to 5 firm back blows between the shoulder blades with the heel of your hand.',
       'Turn them face up along your arm. Put two fingers in the centre of the chest, just below the nipple line, and give up to 5 sharp chest thrusts.',
@@ -124,13 +121,15 @@ export const guides: Guide[] = [
       'Repeat back blows and chest thrusts. If they become unresponsive, start infant CPR.',
     ],
     dont: ["Don't use abdominal thrusts on a baby."],
-    callWhen: ['If the blockage does not clear quickly — call while you continue.'],
+    callWhen: [
+      'Call emergency now if the blockage does not clear after 3 rounds — keep going while you call on speaker.',
+      'Call immediately if the baby becomes unresponsive, then start infant CPR.',
+    ],
     keywords: 'infant newborn baby choke',
   },
   {
     id: 'bleeding',
     title: 'Severe bleeding',
-    emoji: '🩸',
     severity: 'critical',
     summary: 'Heavy bleeding that will not stop.',
     steps: [
@@ -147,7 +146,6 @@ export const guides: Guide[] = [
   {
     id: 'burns',
     title: 'Burns',
-    emoji: '🔥',
     severity: 'urgent',
     summary: 'Heat, chemical or electrical burns.',
     steps: [
@@ -169,7 +167,6 @@ export const guides: Guide[] = [
   {
     id: 'allergy',
     title: 'Severe allergic reaction',
-    emoji: '🐝',
     severity: 'critical',
     summary: 'Anaphylaxis — can become life-threatening within minutes.',
     signs: ['Swelling of the lips, tongue or throat', 'Difficulty breathing or wheezing', 'Pale, floppy or collapsing', 'Widespread rash'],
@@ -186,7 +183,6 @@ export const guides: Guide[] = [
   {
     id: 'asthma',
     title: 'Asthma attack',
-    emoji: '🌬️',
     severity: 'urgent',
     summary: 'Wheezing, coughing and struggling to breathe.',
     steps: [
@@ -202,7 +198,6 @@ export const guides: Guide[] = [
   {
     id: 'stroke',
     title: 'Stroke — think FAST',
-    emoji: '🧠',
     severity: 'critical',
     summary: 'Sudden face drooping, arm weakness or slurred speech.',
     signs: ['Face: one side drooping', 'Arms: can they lift both?', 'Speech: slurred or confused', 'Time: call emergency now'],
@@ -219,7 +214,6 @@ export const guides: Guide[] = [
   {
     id: 'heart-attack',
     title: 'Heart attack',
-    emoji: '💔',
     severity: 'critical',
     summary: 'Chest pain or pressure that may spread to arms, jaw, neck or back.',
     signs: ['Crushing chest pain or pressure', 'Breathlessness', 'Sweating, nausea, feeling of doom'],
@@ -236,7 +230,6 @@ export const guides: Guide[] = [
   {
     id: 'heat-stroke',
     title: 'Heat stroke',
-    emoji: '🌡️',
     severity: 'urgent',
     summary: 'Very high body temperature, confusion, hot skin.',
     steps: [
@@ -252,7 +245,6 @@ export const guides: Guide[] = [
   {
     id: 'low-sugar',
     title: 'Low blood sugar',
-    emoji: '🍬',
     severity: 'urgent',
     summary: 'Hypoglycaemia — common in people with diabetes.',
     signs: ['Shaky, sweaty, pale', 'Confused or irritable', 'Hungry, drowsy'],
@@ -268,7 +260,6 @@ export const guides: Guide[] = [
   {
     id: 'recovery',
     title: 'Recovery position',
-    emoji: '🛌',
     severity: 'care',
     summary: 'For someone unresponsive but breathing normally.',
     steps: [
@@ -285,7 +276,6 @@ export const guides: Guide[] = [
   {
     id: 'nosebleed',
     title: 'Nosebleed',
-    emoji: '👃',
     severity: 'care',
     summary: 'Bleeding from the nose.',
     steps: [
@@ -299,7 +289,6 @@ export const guides: Guide[] = [
   {
     id: 'fracture',
     title: 'Broken bone or sprain',
-    emoji: '🦴',
     severity: 'urgent',
     summary: 'Pain, swelling, deformity after a fall or blow.',
     steps: [
@@ -314,7 +303,6 @@ export const guides: Guide[] = [
   {
     id: 'poisoning',
     title: 'Poisoning',
-    emoji: '☠️',
     severity: 'urgent',
     summary: 'Swallowed, inhaled or touched something harmful.',
     steps: [
@@ -330,3 +318,6 @@ export const guides: Guide[] = [
 ];
 
 export const getGuide = (id: string) => guides.find((g) => g.id === id);
+
+/** Every guide's illustration lives in assets/aid/<id>.png. */
+export const guideArt = (id: string) => art[id as ArtKey];
