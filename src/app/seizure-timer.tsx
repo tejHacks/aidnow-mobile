@@ -56,7 +56,7 @@ export default function SeizureTimer() {
       <View style={[styles.clock, { backgroundColor: overdue ? c.danger : c.card, borderColor: overdue ? c.danger : c.border }]}>
         <Text style={[styles.time, { color: overdue ? '#fff' : c.text }]}>{fmt(seconds)}</Text>
         <Text style={{ color: overdue ? '#FFE4E6' : c.muted, fontWeight: '600' }}>
-          {overdue ? 'Over 5 minutes — call emergency now' : startedAt ? 'Seizure in progress' : 'Tap start when the seizure begins'}
+          {overdue ? 'Over 5 minutes. Call emergency now' : startedAt ? 'Seizure in progress' : 'Tap start when the seizure begins'}
         </Text>
       </View>
 
@@ -76,7 +76,7 @@ export default function SeizureTimer() {
           <Label>Recent seizures</Label>
           {log.slice(0, 10).map((e) => (
             <Body key={e.id}>
-              {new Date(e.startedAt).toLocaleString()} — {fmt(e.seconds)}
+              {new Date(e.startedAt).toLocaleString()} · {fmt(e.seconds)}
             </Body>
           ))}
           <Body muted style={{ fontSize: 13 }}>Share these times with their doctor.</Body>

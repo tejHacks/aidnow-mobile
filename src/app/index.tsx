@@ -49,7 +49,7 @@ export default function Home() {
           <Image source={require('@/assets/images/icon.png')} style={styles.logo} accessibilityLabel="AidNow" />
           <View style={{ flex: 1 }}>
             <Text style={[styles.title, { color: c.text }]}>AidNow</Text>
-            <Text style={{ color: c.muted, fontSize: 13 }}>First aid, anywhere — works offline</Text>
+            <Text style={{ color: c.muted, fontSize: 13 }}>First aid anywhere. Works offline.</Text>
           </View>
         </View>
 

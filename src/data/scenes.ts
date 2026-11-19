@@ -1,0 +1,20 @@
+/** "How to help" pictures, one per guide (see tool/make-scenes.py), with a description for screen readers. */
+export const scenes: Record<string, { image: number; alt: string }> = {
+  cpr: { image: require('@/assets/aid/scene-cpr.png'), alt: 'A helper kneels beside the person, arms straight, both hands on the centre of the chest, pushing down 100 to 120 times a minute.' },
+  seizure: { image: require('@/assets/aid/scene-seizure.png'), alt: 'A folded jacket cushions the head, hard objects are moved away, and the helper times the seizure without holding the person down.' },
+  fainting: { image: require('@/assets/aid/scene-fainting.png'), alt: 'The person lies on their back with their legs raised about 30 cm on a box.' },
+  choking: { image: require('@/assets/aid/scene-choking.png'), alt: 'The helper stands behind, with a fist just above the belly button, pulling in and up.' },
+  'choking-baby': { image: require('@/assets/aid/scene-choking-baby.png'), alt: 'The baby lies face down along the helper’s forearm, head lower than the bottom, while the helper gives back blows with the heel of the hand.' },
+  bleeding: { image: require('@/assets/aid/scene-bleeding.png'), alt: 'A hand presses firmly on a clean cloth over the wound.' },
+  burns: { image: require('@/assets/aid/scene-burns.png'), alt: 'The burnt arm is held under cool running water for 20 minutes.' },
+  allergy: { image: require('@/assets/aid/scene-allergy.png'), alt: 'The helper presses an adrenaline auto-injector into the outer thigh of the seated person.' },
+  asthma: { image: require('@/assets/aid/scene-asthma.png'), alt: 'The person sits upright, leaning slightly forward, using their reliever inhaler, with a helper beside them.' },
+  stroke: { image: require('@/assets/aid/scene-stroke.png'), alt: 'One side of the face droops and one arm drifts down, while the helper calls emergency services. Think FAST.' },
+  'heart-attack': { image: require('@/assets/aid/scene-heart-attack.png'), alt: 'The person half-sits against a wall with knees bent while the helper calls emergency services.' },
+  'heat-stroke': { image: require('@/assets/aid/scene-heat-stroke.png'), alt: 'The person lies in the shade while the helper wets their skin and fans them.' },
+  'low-sugar': { image: require('@/assets/aid/scene-low-sugar.png'), alt: 'The helper gives a sugary drink to the seated person, who is awake and can swallow.' },
+  recovery: { image: require('@/assets/aid/scene-recovery.png'), alt: 'The person lies on their side, top knee bent, hand under the cheek, head tilted back to keep the airway open.' },
+  nosebleed: { image: require('@/assets/aid/scene-nosebleed.png'), alt: 'The person sits leaning forward and pinches the soft part of the nose for 10 to 15 minutes.' },
+  fracture: { image: require('@/assets/aid/scene-fracture.png'), alt: 'The injured arm is supported in a sling in the position it was found.' },
+  poisoning: { image: require('@/assets/aid/scene-poisoning.png'), alt: 'The helper calls for help and keeps the container of what was taken.' },
+};

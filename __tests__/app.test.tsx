@@ -96,7 +96,7 @@ describe('seizure timer', () => {
       jest.setSystemTime(Date.UTC(2026, 10, 18, 10, 5, 1));
       jest.advanceTimersByTime(1000);
     });
-    expect(screen.getByText(/Over 5 minutes — call emergency now/)).toBeOnTheScreen();
+    expect(screen.getByText(/Over 5 minutes. Call emergency now/)).toBeOnTheScreen();
   });
 });
 

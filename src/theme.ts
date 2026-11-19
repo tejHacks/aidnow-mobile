@@ -1,5 +1,5 @@
 /**
- * Design tokens. `brand` is the only thing that changes between apps —
+ * Design tokens. `brand` is the only thing that changes between apps;
  * everything else (surfaces, text, radii, spacing) is shared.
  */
 import { useColorScheme } from 'react-native';

@@ -71,3 +71,20 @@ describe('emergency numbers', () => {
     expect(emergencyNumberFor('NG').note).toMatch(/767/);
   });
 });
+
+describe('how-to-help pictures', () => {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { scenes } = require('@/data/scenes');
+  it('every guide has a picture with a description for screen readers', () => {
+    for (const g of guides) {
+      expect(scenes[g.id]).toBeDefined();
+      expect(scenes[g.id].alt.length).toBeGreaterThan(30);
+    }
+  });
+});
+
+describe('plain language', () => {
+  it('no em dashes in any guide text', () => {
+    for (const g of guides) expect(JSON.stringify(g)).not.toMatch(/—/);
+  });
+});

@@ -19,7 +19,7 @@ export const slides = [
   {
     key: 'offline',
     art: art['onboard-offline'],
-    title: 'Works anywhere —\neven with no signal.',
+    title: 'Works anywhere,\neven with no signal.',
     body: 'Every guide, the CPR coach and the seizure timer live on your phone. No data needed.',
   },
   {

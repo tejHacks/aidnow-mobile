@@ -18,7 +18,13 @@
         "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#E11D48"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "versionCode": 1,
+      "blockedPermissions": [
+        "android.permission.SYSTEM_ALERT_WINDOW",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
+      ]
     },
     "web": {
       "output": "single",
@@ -50,6 +56,7 @@
         "projectId": "d5fc7c0d-2b85-45cc-be38-d9cbd75ca59b"
       }
     },
-    "owner": "tejcodes"
+    "owner": "tejcodes",
+    "description": "Calm, step-by-step first aid for 17 emergencies, a one-tap emergency call, a seizure timer and a CPR coach. Works with no internet."
   }
 }

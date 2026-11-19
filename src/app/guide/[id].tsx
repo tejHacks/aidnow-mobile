@@ -8,6 +8,7 @@ import { Image } from 'expo-image';
 
 import { art } from '@/data/art';
 import { getGuide, guideArt } from '@/data/guides';
+import { scenes } from '@/data/scenes';
 import { usePalette } from '@/theme';
 
 export default function GuideScreen() {
@@ -48,6 +49,15 @@ export default function GuideScreen() {
 
       <View style={{ gap: 10 }}>
         <Label>What to do</Label>
+        {scenes[guide.id] ? (
+          <Image
+            source={scenes[guide.id].image}
+            style={[styles.scene, { borderColor: c.border }]}
+            contentFit="cover"
+            accessibilityLabel={scenes[guide.id].alt}
+            accessibilityIgnoresInvertColors
+          />
+        ) : null}
         {guide.steps.map((step, i) => (
           <View key={i} style={[styles.step, { backgroundColor: c.card, borderColor: c.border }]}>
             <View style={[styles.num, { backgroundColor: c.primary }]}>
@@ -83,6 +93,7 @@ export default function GuideScreen() {
 }
 
 const styles = StyleSheet.create({
+  scene: { width: '100%', aspectRatio: 1.6, borderRadius: 22, borderWidth: 1 },
   step: { flexDirection: 'row', gap: 14, padding: 16, borderRadius: 18, borderWidth: 1, alignItems: 'flex-start' },
   num: { width: 30, height: 30, borderRadius: 15, alignItems: 'center', justifyContent: 'center' },
   numText: { color: '#fff', fontWeight: '800' },
