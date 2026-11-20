@@ -5,8 +5,8 @@
 <h1 align="center">AidNow</h1>
 
 <p align="center">
-  <strong>Know what to do in an emergency, wherever you are.</strong><br />
-  Offline-first first aid for seizures, fainting, choking, CPR, bleeding, burns and more.
+    <strong>Know what to do in an emergency, wherever you are.</strong><br />
+    Offline-first first aid for seizures, fainting, choking, CPR, bleeding, burns and more.
 </p>
 
 <p align="center">
